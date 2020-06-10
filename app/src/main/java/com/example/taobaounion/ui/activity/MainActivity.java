@@ -1,4 +1,4 @@
-package com.example.taobaounion;
+package com.example.taobaounion.ui.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,35 +8,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.taobaounion.R;
 import com.example.taobaounion.base.BaseFragment;
 import com.example.taobaounion.ui.fragment.HomeFragment;
 import com.example.taobaounion.ui.fragment.RedPacketFragment;
 import com.example.taobaounion.ui.fragment.SearchFragment;
 import com.example.taobaounion.ui.fragment.SelectedFragment;
-import com.example.taobaounion.utils.LogUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.main_navigation_bar)
     public BottomNavigationView mNavigationView;//绑定容器  绑定的方法不可以是 static 或者 private
+
     private HomeFragment mHomeFragment;
     private SelectedFragment mSelectedFragment;
     private RedPacketFragment mRedPacketFragment;
     private SearchFragment mSearchFragment;
     private FragmentManager mFm;
+    private Unbinder mBind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);//绑定Activity
-
+        //绑定Activity
+        mBind = ButterKnife.bind(this);
         initFragment();
         initListener();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mBind != null) {
+            mBind.unbind();//解除绑定
+        }
     }
 
     private void initFragment() {
@@ -54,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 //Log.d(TAG, "title-->" + item.getTitle() + "|id-->" + item.getItemId());
-                //*测试
+                /*测试
                 if (item.getItemId() == R.id.home) {
                     LogUtils.d(MainActivity.class, "切换到首页");
                     switchFragment(mHomeFragment);
@@ -67,6 +78,24 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.search) {
                     LogUtils.d(MainActivity.class, "切换到搜索");
                     switchFragment(mSearchFragment);
+                }*/
+                switch(item.getItemId()) {
+                    case R.id.home:
+                        //LogUtils.d(this,"切换到首页");
+                        switchFragment(mHomeFragment);
+                        break;
+                    case R.id.selected:
+                        //LogUtils.d(this,"切换到精选页面");
+                        switchFragment(mSelectedFragment);
+                        break;
+                    case R.id.red_packet:
+                        //LogUtils.d(this,"切换到特惠");
+                        switchFragment(mRedPacketFragment);
+                        break;
+                    case R.id.search:
+                        //LogUtils.d(this,"切换到搜索页面");
+                        switchFragment(mSearchFragment);
+                        break;
                 }
                 return true;
             }

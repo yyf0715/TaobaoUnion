@@ -13,27 +13,27 @@ public class LogUtils {
     private static final int WARNING_LEV = 2;
     private static final int ERROR_LEV = 1;
 
-    public static void d(Class cla, String log) {//debug
+    public static void d(Object obj, String log) {//debug
         if (currentLev >= DEBUG_LEV) {
-            Log.d(cla.getSimpleName(), log);
+            Log.d(obj.getClass().getSimpleName(), log);
         }
     }
 
-    public static void i(Class cla, String log) {//info
+    public static void i(Object obj, String log) {//info
         if (currentLev >= INFO_LEV) {
-            Log.i(cla.getSimpleName(), log);
+            Log.i(obj.getClass().getSimpleName(), log);
         }
     }
 
-    public static void w(Class cla, String log) {//waring
+    public static void w(Object obj, String log) {//waring
         if (currentLev >= WARNING_LEV) {
-            Log.w(cla.getSimpleName(), log);
+            Log.w(obj.getClass().getSimpleName(), log);
         }
     }
 
-    public static void e(Class cla, String log) {//erro
+    public static void e(Object obj, String log) {//erro
         if (currentLev >= ERROR_LEV) {
-            Log.e(cla.getSimpleName(), log);
+            Log.e(obj.getClass().getSimpleName(), log);
         }
     }
 }
