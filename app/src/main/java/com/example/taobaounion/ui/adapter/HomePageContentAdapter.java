@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContentAdapter.InnerHolder> {
 
 
-    List<HomePagerContent.DataBean> data = new ArrayList<>();
+    List<HomePagerContent.DataBean> mData = new ArrayList<>();
 
     @NonNull
     @Override
@@ -38,19 +38,29 @@ public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContent
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {//绑定数据
         //设置数据
-        HomePagerContent.DataBean dataBean = data.get(position);
+        HomePagerContent.DataBean dataBean = mData.get(position);
         holder.setData(dataBean);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
-    public void setData(List<HomePagerContent.DataBean> contents) {//设置content的数据
-        data.clear();
-        data.addAll(contents);
+    public void setmData(List<HomePagerContent.DataBean> contents) {//设置content的数据
+        mData.clear();
+        mData.addAll(contents);
         notifyDataSetChanged();
+    }
+
+    public void addData(List<HomePagerContent.DataBean> contents) {
+        //添加之前拿到原来的size
+
+        int olderSize = mData.size();
+
+        mData.addAll(contents);//添加数据到尾部
+        //更新UI
+        notifyItemRangeChanged(olderSize,mData.size());
     }
 
 
@@ -78,7 +88,7 @@ public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContent
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         public void setData(HomePagerContent.DataBean dataBean) {
@@ -90,11 +100,11 @@ public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContent
             float resultPrise = Float.parseFloat(final_price) - couponAmount;
             //LogUtils.d(this,"券后价"+resultPrise);
             // LogUtils.d(this,"券后价"+final_price);
-            offPriseTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_off_prise),couponAmount));//优惠券
-            finalPriseTv.setText(String.format("%.2f",resultPrise));//优惠后的价格
+            offPriseTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_off_prise), couponAmount));//优惠券
+            finalPriseTv.setText(String.format("%.2f", resultPrise));//优惠后的价格
             originalPriseTv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);//中划线
-            originalPriseTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_original_prise),final_price));//优惠前的价格
-            sellCountTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_sell_count),dataBean.getVolume()));//30天内已购买人数
+            originalPriseTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_original_prise), final_price));//优惠前的价格
+            sellCountTv.setText(String.format(itemView.getContext().getString(R.string.text_goods_sell_count), dataBean.getVolume()));//30天内已购买人数
 
         }
     }

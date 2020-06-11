@@ -59,7 +59,6 @@ public class HomePresenterImpl implements IHomePresenter {
             @Override
             public void onFailure(Call<Categories> call, Throwable t) {
                 //加载失败
-                //TODO
                 LogUtils.d(this, "HomePresenterImpl请求失败" + t.toString());
                 if (mCallback!=null) {
                     mCallback.onError();
