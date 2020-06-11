@@ -1,6 +1,9 @@
 package com.example.taobaounion.presenter;
 
-public interface ICategoryPagerPresenter {
+import com.example.taobaounion.base.IBasePresenter;
+import com.example.taobaounion.view.ICategoryPagerCallback;
+
+public interface ICategoryPagerPresenter extends IBasePresenter<ICategoryPagerCallback> {
 
     /**
      * 根据分类id去获取内容
@@ -11,4 +14,5 @@ public interface ICategoryPagerPresenter {
     void loaderMore(int categoryId);
 
     void reload(int categoryId);
+
 }

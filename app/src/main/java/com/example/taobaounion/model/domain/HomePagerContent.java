@@ -4,6 +4,16 @@ import java.util.List;
 
 public class HomePagerContent {
 
+    @Override
+    public String toString() {
+        return "HomePagerContent{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     /**
      * success : true
      * code : 10000
@@ -11,8 +21,10 @@ public class HomePagerContent {
      * data : [{"category_id":50013196,"category_name":null,"click_url":"//s.click.taobao.com/t?e=m%3D2%26s%3DhXqHdcVPA31w4vFB6t2Z2ueEDrYVVa64Dne87AjQPk9yINtkUhsv0BcvKH%2BTjMa38aSx7PqjIIZm5nS0VR3oT0KAZCke%2BMGJxC%2FP4%2FZfPFbcQmwDRwHnn1oN8CPq4PKMZiqtwk9j5QPwdDmZ4my9rNxg%2BOuc502%2FxKQVLSayBBekOrGae4DS5oO2CiNcVz0Ken9V8QqUE14KAPbaLraL5LtdhRLMp6nxY4S2k1mJ%2BZU%3D&scm=1007.19011.125573.0_9660&pvid=9e141d3e-367c-445e-b2dd-164409bc01e7&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;originalFloorId:9660;pvid:9e141d3e-367c-445e-b2dd-164409bc01e7;app_pvid:59590_11.8.57.194_76981_1575265017272&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3e_ba02%4001","commission_rate":"6.0","coupon_amount":50,"coupon_click_url":"//uland.taobao.com/coupon/edetail?e=jTRK9ngpcrwNfLV8niU3R5TgU2jJNKOfU1BGIDN741G0%2Bc5Gzwi6geKSfLX1rbqQLGbJes29FQq2QeBl4W2u75z0DDzD1ZdVKMOj3xTK3tZKuy%2B0WAVbvPskU%2Fn7vZ%2Fe3KE7Ta9aMuRNo1KEDehNsJ4dcb7gMzr8o%2Be84lu5p3EGQASttHIRqUS8oXsFw3XFyDMraI2cBGPGcv8Nne7cgq5OaBGcL9GSTA0FRtOwCuw%3D&&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;app_pvid:59590_11.8.57.194_76981_1575265017272;tpp_pvid:9e141d3e-367c-445e-b2dd-164409bc01e7&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3e_ba02%4001","coupon_end_time":"1575561599000","coupon_info":null,"coupon_remain_count":97000,"coupon_share_url":"//uland.taobao.com/coupon/edetail?e=jTRK9ngpcrwNfLV8niU3R5TgU2jJNKOfU1BGIDN741G0%2Bc5Gzwi6geKSfLX1rbqQLGbJes29FQq2QeBl4W2u75z0DDzD1ZdVKMOj3xTK3tZKuy%2B0WAVbvPskU%2Fn7vZ%2Fe3KE7Ta9aMuRNo1KEDehNsJ4dcb7gMzr8o%2Be84lu5p3EGQASttHIRqUS8oXsFw3XFyDMraI2cBGPGcv8Nne7cgq5OaBGcL9GSTA0FRtOwCuw%3D&&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;app_pvid:59590_11.8.57.194_76981_1575265017272;tpp_pvid:9e141d3e-367c-445e-b2dd-164409bc01e7&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3e_ba02%4001","coupon_start_fee":"79.0","coupon_start_time":"1575216000000","coupon_total_count":100000,"item_description":"全面升级 加绒加厚 更有加长款满足个高的你","item_id":560264222655,"level_one_category_id":16,"level_one_category_name":"女装/女士精品","nick":"依牧绒旗舰店","pict_url":"//gw.alicdn.com/bao/uploaded/i4/2131383559/O1CN01DMHSl01cA4AO3d5gI_!!0-item_pic.jpg","seller_id":2131383559,"shop_title":"依牧绒旗舰店","small_images":{"string":["//img.alicdn.com/i2/2131383559/O1CN01xvHcmS1cA44x3e8Ag_!!2131383559.jpg","//img.alicdn.com/i3/2131383559/TB2OuVLjWagSKJjy0FaXXb0dpXa_!!2131383559.jpg","//img.alicdn.com/i1/2131383559/TB23CrcnYsTMeJjSsziXXcdwXXa_!!2131383559.jpg","//img.alicdn.com/i3/2131383559/TB2uh5.nYwTMeJjSszfXXXbtFXa_!!2131383559.jpg"]},"title":"2019秋冬马甲羽绒棉女加绒保暖学生马夹棉服外套女棉衣面包服背心","user_type":1,"volume":30804,"zk_final_price":"79.9"},{"category_id":50019001,"category_name":null,"click_url":"//s.click.taobao.com/t?e=m%3D2%26s%3DN8yGtdbUXiVw4vFB6t2Z2ueEDrYVVa64Dne87AjQPk9yINtkUhsv0BcvKH%2BTjMa38aSx7PqjIIZm5nS0VR3oT0KAZCke%2BMGJxC%2FP4%2FZfPFbcQmwDRwHnn1oN8CPq4PKMZiqtwk9j5QNerBM5mSXVLZIQa6qg9eLV0a3u46RXbtekOrGae4DS5oO2CiNcVz0KPqWqRPDXyNNpqoxKosq%2FMbtdhRLMp6nxY4S2k1mJ%2BZU%3D&scm=1007.19011.125573.0_9660&pvid=9e141d3e-367c-445e-b2dd-164409bc01e7&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;originalFloorId:9660;pvid:9e141d3e-367c-445e-b2dd-164409bc01e7;app_pvid:59590_11.8.57.194_76981_1575265017272&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3f_ba08%4001","commission_rate":"9.0","coupon_amount":20,"coupon_click_url":"//uland.taobao.com/coupon/edetail?e=QQzniHg2%2BooNfLV8niU3R5TgU2jJNKOfU1BGIDN741G0%2Bc5Gzwi6geKSfLX1rbqQLGbJes29FQq2QeBl4W2u7xytS5OGw29olRKZ8DI0LPZKuy%2B0WAVbvPskU%2Fn7vZ%2Fe3KE7Ta9aMuRNo1KEDehNsJ4dcb7gMzr8o%2Be84lu5p3EGQASttHIRqWOUJeY8%2FPSU5VEyZiiJcVy4Q6eh0tBC8a5OaBGcL9GSTA0FRtOwCuw%3D&&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;app_pvid:59590_11.8.57.194_76981_1575265017272;tpp_pvid:9e141d3e-367c-445e-b2dd-164409bc01e7&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3f_ba08%4001","coupon_end_time":"1575475199000","coupon_info":null,"coupon_remain_count":99000,"coupon_share_url":"//uland.taobao.com/coupon/edetail?e=QQzniHg2%2BooNfLV8niU3R5TgU2jJNKOfU1BGIDN741G0%2Bc5Gzwi6geKSfLX1rbqQLGbJes29FQq2QeBl4W2u7xytS5OGw29olRKZ8DI0LPZKuy%2B0WAVbvPskU%2Fn7vZ%2Fe3KE7Ta9aMuRNo1KEDehNsJ4dcb7gMzr8o%2Be84lu5p3EGQASttHIRqWOUJeY8%2FPSU5VEyZiiJcVy4Q6eh0tBC8a5OaBGcL9GSTA0FRtOwCuw%3D&&app_pvid=59590_11.8.57.194_76981_1575265017272&ptl=floorId:9660;app_pvid:59590_11.8.57.194_76981_1575265017272;tpp_pvid:9e141d3e-367c-445e-b2dd-164409bc01e7&union_lens=lensId%3AOPT%401575265017%400b0839c2_0d6c_16ec51c9e3f_ba08%4001","coupon_start_fee":"29.0","coupon_start_time":"1575216000000","coupon_total_count":100000,"item_description":"买1送1 买2送3","item_id":590710941228,"level_one_category_id":50025705,"level_one_category_name":"洗护清洁剂/卫生巾/纸/香薰","nick":"大末居家日用专营店","pict_url":"//gw.alicdn.com/bao/uploaded/i2/1881526428/O1CN01wUGVGL1xM4SAcwL9t_!!0-item_pic.jpg","seller_id":1881526428,"shop_title":"大末居家日用专营店","small_images":{"string":["//img.alicdn.com/i4/1881526428/O1CN01ICyMUo1xM4SL4Rg8S_!!1881526428.jpg","//img.alicdn.com/i1/1881526428/O1CN01SkxFxs1xM4U6pr6CO_!!1881526428.jpg","//img.alicdn.com/i2/1881526428/O1CN017aRJGB1xM4TyHZz0M_!!1881526428.jpg","//img.alicdn.com/i3/1881526428/O1CN01bxnKyp1xM4TzzZZ1S_!!1881526428.jpg"]},"title":"活氧彩漂白剂彩色衣物还原衣服通用彩票粉家用彩漂粉去渍去黄增白","user_type":1,"volume":63107,"zk_final_price":"29.9"}]
      */
 
+
+
     private boolean success;
-    private int code;
+    private long code;
     private String message;
     private List<DataBean> data;
 
@@ -24,11 +36,11 @@ public class HomePagerContent {
         this.success = success;
     }
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
@@ -78,38 +90,71 @@ public class HomePagerContent {
          * zk_final_price : 79.9
          */
 
-        private int category_id;
+        private long category_id;
         private Object category_name;
         private String click_url;
         private String commission_rate;
-        private int coupon_amount;
+        private long coupon_amount;
         private String coupon_click_url;
         private String coupon_end_time;
         private Object coupon_info;
-        private int coupon_remain_count;
+        private long coupon_remain_count;
         private String coupon_share_url;
         private String coupon_start_fee;
         private String coupon_start_time;
-        private int coupon_total_count;
+        private long coupon_total_count;
         private String item_description;
         private long item_id;
-        private int level_one_category_id;
+        private long level_one_category_id;
         private String level_one_category_name;
         private String nick;
         private String pict_url;
-        private int seller_id;
+        private long seller_id;
         private String shop_title;
         private SmallImagesBean small_images;
         private String title;
-        private int user_type;
-        private int volume;
+        private long user_type;
+        private long volume;
         private String zk_final_price;
 
-        public int getCategory_id() {
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "category_id=" + category_id +
+                    ", category_name=" + category_name +
+                    ", click_url='" + click_url + '\'' +
+                    ", commission_rate='" + commission_rate + '\'' +
+                    ", coupon_amount=" + coupon_amount +
+                    ", coupon_click_url='" + coupon_click_url + '\'' +
+                    ", coupon_end_time='" + coupon_end_time + '\'' +
+                    ", coupon_info=" + coupon_info +
+                    ", coupon_remain_count=" + coupon_remain_count +
+                    ", coupon_share_url='" + coupon_share_url + '\'' +
+                    ", coupon_start_fee='" + coupon_start_fee + '\'' +
+                    ", coupon_start_time='" + coupon_start_time + '\'' +
+                    ", coupon_total_count=" + coupon_total_count +
+                    ", item_description='" + item_description + '\'' +
+                    ", item_id=" + item_id +
+                    ", level_one_category_id=" + level_one_category_id +
+                    ", level_one_category_name='" + level_one_category_name + '\'' +
+                    ", nick='" + nick + '\'' +
+                    ", pict_url='" + pict_url + '\'' +
+                    ", seller_id=" + seller_id +
+                    ", shop_title='" + shop_title + '\'' +
+                    ", small_images=" + small_images +
+                    ", title='" + title + '\'' +
+                    ", user_type=" + user_type +
+                    ", volume=" + volume +
+                    ", zk_final_price='" + zk_final_price + '\'' +
+                    '}';
+        }
+
+        public long getCategory_id() {
             return category_id;
         }
 
-        public void setCategory_id(int category_id) {
+        public void setCategory_id(long category_id) {
             this.category_id = category_id;
         }
 
@@ -137,11 +182,11 @@ public class HomePagerContent {
             this.commission_rate = commission_rate;
         }
 
-        public int getCoupon_amount() {
+        public long getCoupon_amount() {
             return coupon_amount;
         }
 
-        public void setCoupon_amount(int coupon_amount) {
+        public void setCoupon_amount(long coupon_amount) {
             this.coupon_amount = coupon_amount;
         }
 
@@ -169,11 +214,11 @@ public class HomePagerContent {
             this.coupon_info = coupon_info;
         }
 
-        public int getCoupon_remain_count() {
+        public long getCoupon_remain_count() {
             return coupon_remain_count;
         }
 
-        public void setCoupon_remain_count(int coupon_remain_count) {
+        public void setCoupon_remain_count(long coupon_remain_count) {
             this.coupon_remain_count = coupon_remain_count;
         }
 
@@ -201,11 +246,11 @@ public class HomePagerContent {
             this.coupon_start_time = coupon_start_time;
         }
 
-        public int getCoupon_total_count() {
+        public long getCoupon_total_count() {
             return coupon_total_count;
         }
 
-        public void setCoupon_total_count(int coupon_total_count) {
+        public void setCoupon_total_count(long coupon_total_count) {
             this.coupon_total_count = coupon_total_count;
         }
 
@@ -225,11 +270,11 @@ public class HomePagerContent {
             this.item_id = item_id;
         }
 
-        public int getLevel_one_category_id() {
+        public long getLevel_one_category_id() {
             return level_one_category_id;
         }
 
-        public void setLevel_one_category_id(int level_one_category_id) {
+        public void setLevel_one_category_id(long level_one_category_id) {
             this.level_one_category_id = level_one_category_id;
         }
 
@@ -257,11 +302,11 @@ public class HomePagerContent {
             this.pict_url = pict_url;
         }
 
-        public int getSeller_id() {
+        public long getSeller_id() {
             return seller_id;
         }
 
-        public void setSeller_id(int seller_id) {
+        public void setSeller_id(long seller_id) {
             this.seller_id = seller_id;
         }
 
@@ -289,19 +334,19 @@ public class HomePagerContent {
             this.title = title;
         }
 
-        public int getUser_type() {
+        public long getUser_type() {
             return user_type;
         }
 
-        public void setUser_type(int user_type) {
+        public void setUser_type(long user_type) {
             this.user_type = user_type;
         }
 
-        public int getVolume() {
+        public long getVolume() {
             return volume;
         }
 
-        public void setVolume(int volume) {
+        public void setVolume(long volume) {
             this.volume = volume;
         }
 
