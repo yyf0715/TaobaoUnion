@@ -49,9 +49,9 @@ public class HomePresenterImpl implements IHomePresenter {
                     }
                 } else {
                     //请求失败
-                    LogUtils.d(HomePresenterImpl.this, "请求失败");
+                    LogUtils.d(HomePresenterImpl.this, "HomePresenterImpl请求失败请求失败。。。");
                     if (mCallback!=null) {
-                        mCallback.onNetworkError();
+                        mCallback.onError();
                     }
                 }
             }
@@ -60,7 +60,10 @@ public class HomePresenterImpl implements IHomePresenter {
             public void onFailure(Call<Categories> call, Throwable t) {
                 //加载失败
                 //TODO
-                LogUtils.d(this, "请求失败" + t.toString());
+                LogUtils.d(this, "HomePresenterImpl请求失败" + t.toString());
+                if (mCallback!=null) {
+                    mCallback.onError();
+                }
             }
         });
 
@@ -72,7 +75,7 @@ public class HomePresenterImpl implements IHomePresenter {
     }
 
     @Override
-    public void unregisterViewCallback(IHomeCallback allback) {
+    public void unregisterViewCallback(IHomeCallback callbackallback) {
         mCallback = null;
     }
 }

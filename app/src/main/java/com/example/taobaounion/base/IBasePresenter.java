@@ -9,7 +9,7 @@ public interface IBasePresenter<T> {
 
     /**
      * 取消UI通知的接口
-     * @param allback
+     * @param callback
      */
-    void unregisterViewCallback(T allback); //取消注册
+    void unregisterViewCallback(T callback); //取消注册
 }

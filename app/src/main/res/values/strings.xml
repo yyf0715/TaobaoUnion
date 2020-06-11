@@ -5,4 +5,7 @@
     <string name="text_red_packet">特惠</string>
     <string name="text_search">搜索</string>
     <string name="text_network_error_tips">网络出错，点击重试</string>
+    <string name="text_goods_off_prise">省%1$d元</string>
+    <string name="text_goods_original_prise">￥%1$s元</string>
+    <string name="text_goods_sell_count">%1$d人已购买</string>
 </resources>

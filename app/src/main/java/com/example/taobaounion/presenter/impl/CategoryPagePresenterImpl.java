@@ -9,7 +9,9 @@ import com.example.taobaounion.utils.UrlUtils;
 import com.example.taobaounion.view.ICategoryPagerCallback;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -39,7 +41,12 @@ public class CategoryPagePresenterImpl implements ICategoryPagerPresenter {
     @Override
     public void getContentByCategoryId(int categoryId) {
         //根据分类ID去加载内容
-        //TODO:
+
+        for (ICategoryPagerCallback callback : callbacks) {
+            if (callback.getCategoryId()==categoryId) {
+                callback.onLoading();
+            }
+        }
 
         Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
         Api api = retrofit.create(Api.class);
@@ -55,20 +62,48 @@ public class CategoryPagePresenterImpl implements ICategoryPagerPresenter {
             @Override
             public void onResponse(Call<HomePagerContent> call, Response<HomePagerContent> response) {
                 int code = response.code();
-                LogUtils.d(CategoryPagePresenterImpl.this,"code-->"+code);
-                if (code == HttpURLConnection.HTTP_OK){
-                    HomePagerContent pagerContent = response.body();
-                    LogUtils.d(CategoryPagePresenterImpl.this,"pagerContent-->"+pagerContent);
-                }else{
-                  //TODO
+                LogUtils.d(CategoryPagePresenterImpl.this, "code-->" + code);
+                if (code == HttpURLConnection.HTTP_OK) {
+                    HomePagerContent pageContent = response.body();
+                    LogUtils.d(CategoryPagePresenterImpl.this, "pagerContent-->" + pageContent);
+                    //把数据给到UI更新
+                    handleHomePageContentResult(pageContent, categoryId);
+
+                } else {
+                    handleNetworkError(categoryId);//网络错误
+
                 }
             }
 
+
             @Override
             public void onFailure(Call<HomePagerContent> call, Throwable t) {
-                LogUtils.d(CategoryPagePresenterImpl.this,"onFailure-->"+t.toString());
+                LogUtils.d(CategoryPagePresenterImpl.this, "onFailure-->" + t.toString());
+                handleNetworkError(categoryId);//网络错误
             }
         });
+    }
+
+    private void handleNetworkError(int categoryId) {
+        for (ICategoryPagerCallback callback : callbacks) {//相匹配才通知UI层更新
+            if (callback.getCategoryId() == categoryId) {
+                callback.onError();
+            }
+        }
+    }
+
+    private void handleHomePageContentResult(HomePagerContent pageContent, int categoryId) {
+        //通知UI层更新数据
+        for (ICategoryPagerCallback callback : callbacks) {
+
+            if (callback.getCategoryId() == categoryId) {
+                if (pageContent == null || pageContent.getData().size() == 0) {
+                    callback.onEmpty();
+                } else {
+                    callback.onContentLoaded(pageContent.getData());
+                }
+            }
+        }
     }
 
     @Override
@@ -81,14 +116,18 @@ public class CategoryPagePresenterImpl implements ICategoryPagerPresenter {
 
     }
 
+    private List<ICategoryPagerCallback> callbacks = new ArrayList<>();
+
     @Override
     public void registerViewCallback(ICategoryPagerCallback callback) {
-
+        if (!callbacks.contains(callback)) {//判断是否存在，不存在的情况下添加进去
+            callbacks.add(callback);
+        }
     }
 
     @Override
-    public void unregisterViewCallback(ICategoryPagerCallback allback) {
-
+    public void unregisterViewCallback(ICategoryPagerCallback callback) {
+        callbacks.remove(callback);
     }
 
 
