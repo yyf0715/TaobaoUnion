@@ -20,6 +20,9 @@ public class HomePresenterImpl implements IHomePresenter {
 
     @Override
     public void getCategories() {
+        if (mCallback != null) {
+            mCallback.onLoading();
+        }
         //加载分类数据
         Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
         Api api = retrofit.create(Api.class);
@@ -30,17 +33,26 @@ public class HomePresenterImpl implements IHomePresenter {
             public void onResponse(Call<Categories> call, Response<Categories> response) {
                 //结果
                 int code = response.code();
-                LogUtils.d(HomePresenterImpl.this,"code-->"+code);
-                if (code== HttpURLConnection.HTTP_OK) {
+                LogUtils.d(HomePresenterImpl.this, "code-->" + code);
+                if (code == HttpURLConnection.HTTP_OK) {
                     //请求成功
                     Categories categories = response.body();
+
 //                    LogUtils.d(HomePresenterImpl.this,"categories-->"+categories.toString());
-                    if (mCallback!=null) {
-                        mCallback.onCategoriesLoaded(categories);//在UI上边获取数据
+                    if (mCallback != null) {
+                        if (categories == null || categories.getData().size() == 0) {
+                            mCallback.onEmpty();
+                        }else {
+                            mCallback.onCategoriesLoaded(categories);//在UI上边获取数据
+                        }
+
                     }
-                }else{
+                } else {
                     //请求失败
-                    LogUtils.d(HomePresenterImpl.this,"请求失败");
+                    LogUtils.d(HomePresenterImpl.this, "请求失败");
+                    if (mCallback!=null) {
+                        mCallback.onNetworkError();
+                    }
                 }
             }
 
@@ -48,7 +60,7 @@ public class HomePresenterImpl implements IHomePresenter {
             public void onFailure(Call<Categories> call, Throwable t) {
                 //加载失败
                 //TODO
-                LogUtils.d(this,"请求失败"+t.toString());
+                LogUtils.d(this, "请求失败" + t.toString());
             }
         });
 

@@ -2,12 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
-    <TextView
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="网络错误，请点击重试"/>
+        android:gravity="center_horizontal"
+        android:id="@+id/network_error_tip"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="13dp"
+
+            android:layout_height="wrap_content"
+            android:src="@mipmap/wifi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@string/text_network_error_tips" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
