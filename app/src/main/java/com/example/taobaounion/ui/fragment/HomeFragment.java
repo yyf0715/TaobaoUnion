@@ -1,16 +1,21 @@
 package com.example.taobaounion.ui.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.taobaounion.R;
 import com.example.taobaounion.base.BaseFragment;
 import com.example.taobaounion.model.domain.Categories;
-import com.example.taobaounion.presenter.impl.HomePresenterImpl;
+import com.example.taobaounion.presenter.IHomePresenter;
 import com.example.taobaounion.ui.adapter.HomePagerAdapter;
+import com.example.taobaounion.utils.LogUtils;
+import com.example.taobaounion.utils.PresenterManager;
 import com.example.taobaounion.view.IHomeCallback;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,7 +26,7 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
     @BindView(R.id.home_indicator)
     public TabLayout mTablayout;
 
-    private HomePresenterImpl mHomePresenter;
+    private IHomePresenter mHomePresenter;
 
     @BindView(R.id.home_pager)
     public ViewPager homePager;
@@ -30,6 +35,20 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
     @Override
     protected int getRootViewResId() {
         return R.layout.fragment_home;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtils.d(this,"onCreateView....");
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        LogUtils.d(this,"onDestroyView....");
+        super.onDestroyView();
     }
 
     @Override
@@ -44,7 +63,7 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
     @Override
     protected void initPresenter() {
         //创建Presenter
-        mHomePresenter = new HomePresenterImpl();
+        mHomePresenter =PresenterManager.getInstance().getmHomePresenter();
         mHomePresenter.registerViewCallback(this);//注册接口
     }
 

@@ -1,5 +1,6 @@
 package com.example.taobaounion.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
@@ -17,11 +18,14 @@ import com.example.taobaounion.base.BaseFragment;
 import com.example.taobaounion.model.domain.Categories;
 import com.example.taobaounion.model.domain.HomePagerContent;
 import com.example.taobaounion.presenter.ICategoryPagerPresenter;
-import com.example.taobaounion.presenter.impl.CategoryPagePresenterImpl;
+import com.example.taobaounion.presenter.ITicketPresenter;
+import com.example.taobaounion.ui.activity.TicketActivity;
 import com.example.taobaounion.ui.adapter.HomePageContentAdapter;
 import com.example.taobaounion.ui.adapter.LooperPagerAdapter;
+import com.example.taobaounion.ui.custom.AuttoLoopViewPager;
 import com.example.taobaounion.utils.Constants;
 import com.example.taobaounion.utils.LogUtils;
+import com.example.taobaounion.utils.PresenterManager;
 import com.example.taobaounion.utils.SizeUtils;
 import com.example.taobaounion.utils.ToastUtil;
 import com.example.taobaounion.view.ICategoryPagerCallback;
@@ -33,7 +37,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class HomePagerFragment extends BaseFragment implements ICategoryPagerCallback {
+public class HomePagerFragment extends BaseFragment implements ICategoryPagerCallback, HomePageContentAdapter.OnListItemClickListener, LooperPagerAdapter.OnLooperPageItemClickListener {
 
     private ICategoryPagerPresenter mCategoryPagePresenter;
     private int mMaterialId;
@@ -53,7 +57,7 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
     public RecyclerView mContentList;
 
     @BindView(R.id.looper_pager)
-    public ViewPager looperPager;
+    public AuttoLoopViewPager looperPager;
 
     @BindView(R.id.home_pager_title)
     public TextView currentCategoryTitleTv;
@@ -82,16 +86,36 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //可见时，开始轮播
+        looperPager.startLoop();
+        //LogUtils.d(this,"onResume......");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        looperPager.stopLoop();
+        //LogUtils.d(this,"onPause......");
+    }
+
+    @Override
     protected void initListener() {
 
+        mContentAdapter.setOnListItemClickListener(this);
+        mLooperPagerAdapter.setOnLooperPageItemClickListener(this);
 
         homePagerParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                if (homeHeaderContainer == null){
+                    return;
+                }
                 int headerHeight = homeHeaderContainer.getMeasuredHeight();
                 int measuredHeight = homePagerParent.getMeasuredHeight();
 
-                LogUtils.d(HomePagerFragment.this, "headerHeight-->" + headerHeight);
+                //LogUtils.d(HomePagerFragment.this, "headerHeight-->" + headerHeight);
                 homePagerNestedView.setHeaderHeight(headerHeight);
 
 
@@ -194,6 +218,7 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
         mLooperPagerAdapter = new LooperPagerAdapter();
         //设置适配器
         looperPager.setAdapter(mLooperPagerAdapter);
+        //looperPager.setDuratioo(3000);//设置轮播间隔
         //设置Refresh相关属性
         twinklingRefreshLayout.setEnableRefresh(false);//禁止上拉加载更多属性
         twinklingRefreshLayout.setEnableLoadmore(true);//下拉加载更多
@@ -203,7 +228,7 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
 
     @Override
     protected void initPresenter() {
-        mCategoryPagePresenter = CategoryPagePresenterImpl.getsInstance();
+        mCategoryPagePresenter = PresenterManager.getInstance().getmCategoryPagePresenter();
         mCategoryPagePresenter.registerViewCallback(this);//注册
     }
 
@@ -317,5 +342,31 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
         if (mCategoryPagePresenter != null) {
             mCategoryPagePresenter.unregisterViewCallback(this);
         }
+    }
+
+    @Override
+    public void onItemClick(HomePagerContent.DataBean item) {
+        //列表内容被点击了
+
+        //LogUtils.d(this,"item click --- >"+item.getTitle());
+        handleItemClick(item);
+    }
+
+    private void handleItemClick(HomePagerContent.DataBean item) {
+        String title = item.getTitle();//获取标题
+        String url = item.getClick_url();//获取url
+        String cover = item.getPict_url();//获取图片url
+        //TODO:拿TicketPresenter去加载数据
+        ITicketPresenter ticketPresenter = PresenterManager.getInstance().getmTicketPresenter();
+        ticketPresenter.getTicket(title,url,cover);
+        startActivity(new Intent(getContext(), TicketActivity.class));
+    }
+
+    @Override
+    public void onLooperItem(HomePagerContent.DataBean item) {
+        //轮播图内容被点击了
+
+        LogUtils.d(this,"轮播图item click --- >"+item.getTitle());
+        handleItemClick(item);
     }
 }

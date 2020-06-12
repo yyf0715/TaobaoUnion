@@ -22,6 +22,8 @@
             android:overScrollMode="never">
 
             <LinearLayout
+                android:gravity="center"
+                android:descendantFocusability="blocksDescendants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -37,9 +39,10 @@
                         android:layout_height="125dp"
                         android:layout_marginBottom="14dp">
 
-                        <androidx.viewpager.widget.ViewPager
+                        <com.example.taobaounion.ui.custom.AuttoLoopViewPager
                             android:id="@+id/looper_pager"
                             android:layout_width="match_parent"
+                            sob:duration = "4000"
                             android:layout_height="125dp" />
 
                         <LinearLayout

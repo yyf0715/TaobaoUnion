@@ -18,6 +18,7 @@ public class LooperPagerAdapter extends PagerAdapter {
 
 
     private List<HomePagerContent.DataBean> mData = new ArrayList<>();
+    private OnLooperPageItemClickListener mItemClickListener = null;
 
     public int getDataSize() {
         return mData.size();
@@ -53,6 +54,17 @@ public class LooperPagerAdapter extends PagerAdapter {
         //Params->参数
         iv.setLayoutParams(layoutParams);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);//图形填充
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener!=null) {
+                    HomePagerContent.DataBean item = mData.get(realPosition);
+                    mItemClickListener.onLooperItem(item);
+                }
+            }
+        });
+
         container.addView(iv);
 
         return iv;
@@ -79,5 +91,13 @@ public class LooperPagerAdapter extends PagerAdapter {
         mData.clear();
         mData.addAll(contents);
         notifyDataSetChanged();
+    }
+
+    public void setOnLooperPageItemClickListener(OnLooperPageItemClickListener listener){
+        this.mItemClickListener = listener;
+    }
+
+    public interface OnLooperPageItemClickListener{
+        void onLooperItem(HomePagerContent.DataBean item);
     }
 }
