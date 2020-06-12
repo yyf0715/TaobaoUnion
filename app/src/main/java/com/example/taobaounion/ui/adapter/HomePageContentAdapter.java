@@ -23,20 +23,24 @@ import butterknife.ButterKnife;
 
 public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContentAdapter.InnerHolder> {
 
+    private static final String TAG = "HomePageContentAdapter";
 
     List<HomePagerContent.DataBean> mData = new ArrayList<>();
+
+    //private int testCount = 1;
 
     @NonNull
     @Override
     public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+       // LogUtils.d(this, "onCreateViewHolder......" + testCount);
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_pager_content, parent, false);//绑定内容布局
-
+        //testCount++;
         return new InnerHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {//绑定数据
+        //LogUtils.d(this,"onBindViewHolder......"+position);
         //设置数据
         HomePagerContent.DataBean dataBean = mData.get(position);
         holder.setData(dataBean);
@@ -60,11 +64,12 @@ public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContent
 
         mData.addAll(contents);//添加数据到尾部
         //更新UI
-        notifyItemRangeChanged(olderSize,mData.size());
+        notifyItemRangeChanged(olderSize, mData.size());
     }
 
 
     public class InnerHolder extends RecyclerView.ViewHolder {
+
 
         @BindView(R.id.goods_cover)
         public ImageView cover;
@@ -94,7 +99,17 @@ public class HomePageContentAdapter extends RecyclerView.Adapter<HomePageContent
         public void setData(HomePagerContent.DataBean dataBean) {
             title.setText(dataBean.getTitle());
             //LogUtils.d(this,"url -->"+dataBean.getPict_url());
-            Glide.with(itemView.getContext()).load(UrlUtils.getCoverPath(dataBean.getPict_url())).into(cover);//把什么图片应用到哪儿
+            ViewGroup.LayoutParams layoutParams = cover.getLayoutParams();
+            int width = layoutParams.width;
+            int height = layoutParams.height;
+            int coversize = (width > height ? width : height) / 2;
+            //LogUtils.d(TAG, "width-->" + width);
+            //LogUtils.d(TAG, "height-->" + height);
+            //LogUtils.d(TAG, "coversize-->" + coversize);
+
+            String coverPath = UrlUtils.getCoverPath(dataBean.getPict_url(), coversize);
+            //LogUtils.d(TAG, "coverPath-->" + coverPath);
+            Glide.with(itemView.getContext()).load(coverPath).into(cover);//把什么图片应用到哪儿
             String final_price = dataBean.getZk_final_price();
             long couponAmount = dataBean.getCoupon_amount();
             float resultPrise = Float.parseFloat(final_price) - couponAmount;

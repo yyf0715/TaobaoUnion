@@ -19,7 +19,7 @@ public class LooperPagerAdapter extends PagerAdapter {
 
     private List<HomePagerContent.DataBean> mData = new ArrayList<>();
 
-    public int getDataSize(){
+    public int getDataSize() {
         return mData.size();
     }
 
@@ -40,10 +40,16 @@ public class LooperPagerAdapter extends PagerAdapter {
 
 
         HomePagerContent.DataBean dataBean = mData.get(realPosition);
-        String coverUrl = UrlUtils.getCoverPath(dataBean.getPict_url());
+        int measuredHeight = container.getMeasuredHeight();
+        int measuredWidth = container.getMeasuredWidth();
+
+        //LogUtils.d(this, "measuredHeight-->" + measuredHeight);
+        //LogUtils.d(this, "measuredWidth-->" + measuredWidth);
+        int ivSize = (measuredWidth > measuredHeight ? measuredWidth : measuredHeight) / 2;//节省流量
+        String coverUrl = UrlUtils.getCoverPath(dataBean.getPict_url(),ivSize );
         ImageView iv = new ImageView(container.getContext());
         Glide.with(container.getContext()).load(coverUrl).into(iv);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //Params->参数
         iv.setLayoutParams(layoutParams);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);//图形填充
@@ -57,6 +63,7 @@ public class LooperPagerAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {//销毁
         container.removeView((View) object);
     }
+
     @Override
     public int getCount() {
         return Integer.MAX_VALUE;

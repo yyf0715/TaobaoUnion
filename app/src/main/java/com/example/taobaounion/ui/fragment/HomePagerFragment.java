@@ -3,9 +3,9 @@ package com.example.taobaounion.ui.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,9 +23,11 @@ import com.example.taobaounion.ui.adapter.LooperPagerAdapter;
 import com.example.taobaounion.utils.Constants;
 import com.example.taobaounion.utils.LogUtils;
 import com.example.taobaounion.utils.SizeUtils;
+import com.example.taobaounion.utils.ToastUtil;
 import com.example.taobaounion.view.ICategoryPagerCallback;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.views.TbNestedScrollView;
 
 import java.util.List;
 
@@ -59,6 +61,16 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
     @BindView(R.id.looper_point_container)
     public LinearLayout looperPointContainer;
 
+    @BindView(R.id.home_pager_parent)
+    public LinearLayout homePagerParent;
+
+    @BindView(R.id.home_pager_nested_scroller)
+    public TbNestedScrollView homePagerNestedView;
+
+    @BindView(R.id.home_pager_header_container)
+    public LinearLayout homeHeaderContainer;
+
+
     //加载更多数据的控件
     @BindView(R.id.home_pager_refresh)
     public TwinklingRefreshLayout twinklingRefreshLayout;
@@ -71,6 +83,38 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
 
     @Override
     protected void initListener() {
+
+
+        homePagerParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int headerHeight = homeHeaderContainer.getMeasuredHeight();
+                int measuredHeight = homePagerParent.getMeasuredHeight();
+
+                LogUtils.d(HomePagerFragment.this, "headerHeight-->" + headerHeight);
+                homePagerNestedView.setHeaderHeight(headerHeight);
+
+
+
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mContentList.getLayoutParams();
+                //LogUtils.d(HomePagerFragment.this,"measuredHeight->"+layoutParams.height);
+                layoutParams.height = measuredHeight;
+                mContentList.setLayoutParams(layoutParams);
+                if (measuredHeight != 0) {
+                    homePagerParent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
+        currentCategoryTitleTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO:
+                int measuredHeight = mContentList.getMeasuredHeight();
+                //LogUtils.d(HomePagerFragment.this,"measuredHeight-->"+measuredHeight);
+
+
+            }
+        });
         //LooperPager监听
         looperPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -99,13 +143,18 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
         twinklingRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {//加载更多
             @Override
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
-                LogUtils.d(HomePagerFragment.class, "触发了LoaderMore。。。");
+                //LogUtils.d(HomePagerFragment.class, "触发了LoaderMore。。。");
                 //加载更多的内容
                 if (mCategoryPagePresenter != null) {
                     mCategoryPagePresenter.loaderMore(mMaterialId);//接口通知
                 }
 
             }
+            /*    //刷新没写
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {//刷新加载
+                super.onRefresh(refreshLayout);
+            }*/
         });
     }
 
@@ -148,7 +197,7 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
         //设置Refresh相关属性
         twinklingRefreshLayout.setEnableRefresh(false);//禁止上拉加载更多属性
         twinklingRefreshLayout.setEnableLoadmore(true);//下拉加载更多
-        //twinklingRefreshLayout
+
 
     }
 
@@ -209,12 +258,18 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
 
     @Override
     public void onLoaderMoreError() {
-
+        ToastUtil.showToast("网络异常，请稍后重试");
+        if (twinklingRefreshLayout!=null) {
+            twinklingRefreshLayout.finishLoadmore();//结束加载更多动画
+        }
     }
 
     @Override
     public void onLoaderMoreEmpty() {
-
+        ToastUtil.showToast("没有更多的数据了");
+        if (twinklingRefreshLayout!=null) {
+            twinklingRefreshLayout.finishLoadmore();//结束加载更多动画
+        }
     }
 
     @Override
@@ -224,7 +279,7 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
         if (twinklingRefreshLayout!=null) {
             twinklingRefreshLayout.finishLoadmore();//结束加载更多动画
         }
-        Toast.makeText(getContext(),"加载了"+contents.size()+"条数据",Toast.LENGTH_SHORT).show();
+        ToastUtil.showToast("加载了" + contents.size() + "条数据");
     }
 
     @Override

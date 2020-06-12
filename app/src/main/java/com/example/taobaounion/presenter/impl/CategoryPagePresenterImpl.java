@@ -135,7 +135,7 @@ public class CategoryPagePresenterImpl implements ICategoryPagerPresenter {
                 int code = response.code();
                 if (code == HttpURLConnection.HTTP_OK) {
                     HomePagerContent result = response.body();
-                    LogUtils.d(CategoryPagePresenterImpl.this,"result-->"+result.toString());
+                    //LogUtils.d(CategoryPagePresenterImpl.this,"result-->"+result.toString());
                     handleLoaderResult(result, categoryId);
                 } else {
 
