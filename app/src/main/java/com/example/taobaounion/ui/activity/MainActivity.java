@@ -29,6 +29,10 @@ public class MainActivity extends BaseActivity {
     private FragmentManager mFm;
 
 
+    @Override
+    protected void initPresenter() {
+
+    }
 
     @Override
     protected void initEvent() {

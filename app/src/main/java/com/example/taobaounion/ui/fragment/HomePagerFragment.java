@@ -3,6 +3,7 @@ package com.example.taobaounion.ui.fragment;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -354,9 +355,18 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
 
     private void handleItemClick(HomePagerContent.DataBean item) {
         String title = item.getTitle();//获取标题
-        String url = item.getClick_url();//获取url
+        //String url = item.getClick_url();//获取url   getClick_url()详情地址
+        String url = item.getCoupon_click_url();
+        if (TextUtils.isEmpty(url)){//可能会有一些没有优惠券了
+            ToastUtil.showToast("来晚了，没有优惠券了");
+            url = item.getClick_url();
+        }
+
         String cover = item.getPict_url();//获取图片url
-        //TODO:拿TicketPresenter去加载数据
+
+
+
+        //拿TicketPresenter去加载数据
         ITicketPresenter ticketPresenter = PresenterManager.getInstance().getmTicketPresenter();
         ticketPresenter.getTicket(title,url,cover);
         startActivity(new Intent(getContext(), TicketActivity.class));

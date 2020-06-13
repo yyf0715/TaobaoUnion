@@ -14,6 +14,16 @@ public class TicketResult {
     private String message;
     private DataBeanX data;
 
+    @Override
+    public String toString() {
+        return "TicketResult{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -25,6 +35,7 @@ public class TicketResult {
     public int getCode() {
         return code;
     }
+
 
     public void setCode(int code) {
         this.code = code;
@@ -70,6 +81,14 @@ public class TicketResult {
             private DataBean data;
             private String request_id;
 
+            @Override
+            public String toString() {
+                return "TbkTpwdCreateResponseBean{" +
+                        "data=" + data +
+                        ", request_id='" + request_id + '\'' +
+                        '}';
+            }
+
             public DataBean getData() {
                 return data;
             }
@@ -92,6 +111,13 @@ public class TicketResult {
                  */
 
                 private String model;
+
+                @Override
+                public String toString() {
+                    return "DataBean{" +
+                            "model='" + model + '\'' +
+                            '}';
+                }
 
                 public String getModel() {
                     return model;
