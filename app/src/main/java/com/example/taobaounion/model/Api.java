@@ -2,6 +2,8 @@ package com.example.taobaounion.model;
 
 import com.example.taobaounion.model.domain.Categories;
 import com.example.taobaounion.model.domain.HomePagerContent;
+import com.example.taobaounion.model.domain.SelectedContent;
+import com.example.taobaounion.model.domain.SelectedPageCategory;
 import com.example.taobaounion.model.domain.TicketParm;
 import com.example.taobaounion.model.domain.TicketResult;
 
@@ -21,4 +23,10 @@ public interface Api {
 
     @POST("tpwd")
     Call<TicketResult> getTicket(@Body TicketParm ticketParm);
+
+    @GET("recommend/categories")
+    Call<SelectedPageCategory> getSelectedPageCategories();
+
+    @GET()
+    Call<SelectedContent> getSelectedContent(@Url String url);
 }
