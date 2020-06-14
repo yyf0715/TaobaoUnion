@@ -27,7 +27,7 @@ public class OnSellPagePresenterImpl implements IOnSellPagePresenter {
 
     @Override
     public void getOnSellContent() {//加载数据
-        if (mIsLoading){
+        if (mIsLoading) {
             return;
         }
         mIsLoading = true;
@@ -54,21 +54,25 @@ public class OnSellPagePresenterImpl implements IOnSellPagePresenter {
 
             @Override
             public void onFailure(Call<OnSellContent> call, Throwable t) {
-
+                onError();
             }
         });
 
     }
 
     private boolean isEmpty(OnSellContent content) {
-        int size = content.getData().getTbk_dg_optimus_material_response().getResult_list().getMap_data().size();
-        return size == 0;
+        try {
+            int size = content.getData().getTbk_dg_optimus_material_response().getResult_list().getMap_data().size();
+            return false;
+        } catch (NullPointerException e){
+            e.printStackTrace();
+            return true;
+        }
     }
 
     private void onSuccess(OnSellContent result) {
         if (mOnSellPageCallback != null) {
             try {
-                int size = result.getData().getTbk_dg_optimus_material_response().getResult_list().getMap_data().size();
                 if (isEmpty(result)) {
                     onEmpty();
                 } else {
@@ -107,11 +111,9 @@ public class OnSellPagePresenterImpl implements IOnSellPagePresenter {
 
     @Override
     public void loadedMore() {
-
-        if (mIsLoading){
+        if (mIsLoading) {
             return;
         }
-
         //加载更多
         mCurrentPage++;
         //去加载更多内容
@@ -146,18 +148,18 @@ public class OnSellPagePresenterImpl implements IOnSellPagePresenter {
     }
 
     private void onMoreLoaded(OnSellContent result) {
-        if (mOnSellPageCallback != null) {
-            if (isEmpty(result)) {
-                mOnSellPageCallback.onMoreLoaded(result);
-            }else {
-                mOnSellPageCallback.onMoreLoadEmpty();
-            }
+
+        if (isEmpty(result)) {
+            mCurrentPage--;
+            mOnSellPageCallback.onMoreLoadEmpty();
+        }else {
+            //添加内容到适配器
+            mOnSellPageCallback.onMoreLoaded(result);
         }
-    }
+}
 
     @Override
     public void registerViewCallback(IOnSellPageCallback callback) {
-
         this.mOnSellPageCallback = callback;
 
     }
