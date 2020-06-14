@@ -46,6 +46,14 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
     }
 
     @Override
+    protected void onRetryCilck() {
+        //重试
+        if (mSelectedPresenter != null) {
+            mSelectedPresenter.reloadContent();
+        }
+    }
+
+    @Override
     protected void release() {
         super.release();
         if (mSelectedPresenter != null) {

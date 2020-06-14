@@ -18,7 +18,6 @@ import retrofit2.Retrofit;
 public class SelectedPresenterImpl implements ISelectedPresenter {
 
     private final Api mApi;
-    private SelectedPageCategory.DataBean mCurrentCategoryItem;
 
     public SelectedPresenterImpl() {
         Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
@@ -67,7 +66,6 @@ public class SelectedPresenterImpl implements ISelectedPresenter {
     @Override
     public void getContentByCategory(SelectedPageCategory.DataBean item) {
 
-        this.mCurrentCategoryItem = item;
         int categoryId = item.getFavorites_id();
         //LogUtils.d(this,"categoryId-->"+categoryId);
         String targetUrl = UrlUtils.getSelectedPageContentUrl(categoryId);
@@ -98,9 +96,7 @@ public class SelectedPresenterImpl implements ISelectedPresenter {
 
     @Override
     public void reloadContent() {
-        if (mCurrentCategoryItem != null) {
-            this.getContentByCategory(mCurrentCategoryItem);
-        }
+            this.getCategorises();
     }
 
     @Override

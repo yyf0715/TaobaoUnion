@@ -10,7 +10,7 @@ import com.example.taobaounion.R;
 import com.example.taobaounion.base.BaseActivity;
 import com.example.taobaounion.base.BaseFragment;
 import com.example.taobaounion.ui.fragment.HomeFragment;
-import com.example.taobaounion.ui.fragment.RedPacketFragment;
+import com.example.taobaounion.ui.fragment.OnSellFragment;
 import com.example.taobaounion.ui.fragment.SearchFragment;
 import com.example.taobaounion.ui.fragment.SelectedFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity {
 
     private HomeFragment mHomeFragment;
     private SelectedFragment mSelectedFragment;
-    private RedPacketFragment mRedPacketFragment;
+    private OnSellFragment mOnSellFragment;
     private SearchFragment mSearchFragment;
     private FragmentManager mFm;
 
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
     private void initFragment() {
         mHomeFragment = new HomeFragment();
         mSelectedFragment = new SelectedFragment();
-        mRedPacketFragment = new RedPacketFragment();
+        mOnSellFragment = new OnSellFragment();
         mSearchFragment = new SearchFragment();
         mFm = getSupportFragmentManager();//得到fragment支持包
         switchFragment(mHomeFragment);//默认选择首页
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.red_packet:
                         //LogUtils.d(this,"切换到特惠");
-                        switchFragment(mRedPacketFragment);
+                        switchFragment(mOnSellFragment);
                         break;
                     case R.id.search:
                         //LogUtils.d(this,"切换到搜索页面");
