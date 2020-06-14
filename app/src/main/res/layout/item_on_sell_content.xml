@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -18,12 +19,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
             android:text="艾叶生姜红花老姜草本泡脚中药包男女足浴粉包祛濕去濕..艾叶生姜红花老姜草本泡脚中药包男女足浴粉包祛濕去濕.." />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:orientation="horizontal">
 
             <TextView
@@ -31,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥58.9"
-                android:textColor="FFD0021B" />
+                android:textColor="#FFD0021B" />
 
             <TextView
                 android:id="@+id/on_sell_off_prise_tv"

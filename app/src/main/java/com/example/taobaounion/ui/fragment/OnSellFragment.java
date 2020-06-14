@@ -1,6 +1,7 @@
 package com.example.taobaounion.ui.fragment;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.example.taobaounion.presenter.IOnSellPagePresenter;
 import com.example.taobaounion.ui.adapter.OnSellContentAdapter;
 import com.example.taobaounion.utils.PresenterManager;
 import com.example.taobaounion.view.IOnSellPageCallback;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import butterknife.BindView;
 
@@ -24,7 +26,16 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback 
 
     @BindView(R.id.on_sell_content_list)
     public RecyclerView mContentRv;
-    private OnSellContentAdapter mOnSellContentAdapte;
+
+
+   // @BindView(R.id.fragment_bar_title_tv)
+    public TextView barTitleTv;
+
+
+   // @BindView(R.id.on_sell_refresh_layout)
+    public TwinklingRefreshLayout mTwinklingRefreshLayout;
+    
+    private OnSellContentAdapter mOnSellContentAdapter ;
 
     @Override
     protected void initPresenter() {
@@ -32,6 +43,7 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback 
         //注册逻辑层
         mOnSellPagePresenter = PresenterManager.getInstance().getmSellPagePresenter();
         mOnSellPagePresenter.registerViewCallback(this);
+        mOnSellPagePresenter.getOnSellContent();
     }
 
     @Override
@@ -50,20 +62,19 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback 
     @Override
     protected void initView(View rootView) {
         setUpState(State.SUCCESS);
-
-        mOnSellContentAdapte = new OnSellContentAdapter();
+        mOnSellContentAdapter = new OnSellContentAdapter();
         //设置布局管理器
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),DEFAULT_SPAN_COUNT);//DEFAULT_SPAN_COUNT两列
         mContentRv.setLayoutManager(gridLayoutManager);
-        mContentRv.setAdapter(mOnSellContentAdapte);
+        mContentRv.setAdapter(mOnSellContentAdapter);
     }
 
     @Override
     public void onContentLoadedSuccess(OnSellContent result) {
         //数据回来了
+        setUpState(State.SUCCESS);
         //TODO:更新Ui
-
-        mOnSellContentAdapte.setData(result);
+        mOnSellContentAdapter.setData(result);
     }
 
     @Override
@@ -83,16 +94,16 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback 
 
     @Override
     public void onError() {
-
+        setUpState(State.ERROR);
     }
 
     @Override
     public void onLoading() {
-
+        setUpState(State.LOADING);
     }
 
     @Override
     public void onEmpty() {
-
+        setUpState(State.EMPTY);
     }
 }

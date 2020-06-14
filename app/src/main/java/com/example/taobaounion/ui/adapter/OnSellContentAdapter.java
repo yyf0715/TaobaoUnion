@@ -21,7 +21,7 @@ public class OnSellContentAdapter extends RecyclerView.Adapter<OnSellContentAdap
     @Override
     public OnSellContentAdapter.InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_on_sell_content, parent, false);
-        
+
         return new InnerHolder(itemView);
     }
 
