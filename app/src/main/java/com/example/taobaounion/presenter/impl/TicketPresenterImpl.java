@@ -35,13 +35,13 @@ public class TicketPresenterImpl implements ITicketPresenter {
         //LogUtils.d(TicketPresenterImpl.this, "ticketResulttitle--->" + title);
         //LogUtils.d(TicketPresenterImpl.this, "ticketResulturl--->" + url);
         //LogUtils.d(TicketPresenterImpl.this, "ticketResultcover--->" + cover);
-        String targetUrl = UrlUtils.getTicketUrl(url);
+        String targetUrl = UrlUtils.getTicketUrl(url);//正确的地址
         //去获取淘口令
         Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
         Api api = retrofit.create(Api.class);
 
         TicketParm ticketParm = new TicketParm(targetUrl, title);
-        Call<TicketResult> task = api.getTicket(ticketParm);
+        Call<TicketResult> task = api.getTicket(ticketParm);//拖过接口获取淘口令
         task.enqueue(new Callback<TicketResult>() {
             @Override
             public void onResponse(Call<TicketResult> call, Response<TicketResult> response) {
@@ -55,7 +55,6 @@ public class TicketPresenterImpl implements ITicketPresenter {
                     //LogUtils.d(TicketPresenterImpl.this, "ticketResult.getData()--->" + ticketResult.getData().toString());
                     //LogUtils.d(TicketPresenterImpl.this, "getTbk_tpwd_create_response()--->" + ticketResult.getData().getTbk_tpwd_create_response().toString());
                     //通知UI更新
-                    //todo:
                     onTicketLoadedSuccess();
                 } else {
                     //请求失败

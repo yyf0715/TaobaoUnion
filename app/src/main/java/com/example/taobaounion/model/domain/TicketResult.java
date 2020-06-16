@@ -1,6 +1,6 @@
 package com.example.taobaounion.model.domain;
 
-public class TicketResult {
+public class TicketResult {//淘口令最终
 
     /**
      * success : true

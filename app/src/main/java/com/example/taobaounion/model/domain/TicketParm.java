@@ -1,6 +1,6 @@
 package com.example.taobaounion.model.domain;
 
-public class TicketParm {
+public class TicketParm {//打折券信息bean
     private String url;
     private String title;
 

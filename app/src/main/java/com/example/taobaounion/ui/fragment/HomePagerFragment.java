@@ -115,12 +115,10 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
                 }
                 int headerHeight = homeHeaderContainer.getMeasuredHeight();
                 int measuredHeight = homePagerParent.getMeasuredHeight();
-
+                //获取整体高度和开头的高度
                 //LogUtils.d(HomePagerFragment.this, "headerHeight-->" + headerHeight);
                 homePagerNestedView.setHeaderHeight(headerHeight);
-
-
-
+                //homePagerNestedView整体高度和头部整体相同，保证滑动时的流畅
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mContentList.getLayoutParams();
                 //LogUtils.d(HomePagerFragment.this,"measuredHeight->"+layoutParams.height);
                 layoutParams.height = measuredHeight;
@@ -130,16 +128,13 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
                 }
             }
         });
-        currentCategoryTitleTv.setOnClickListener(new View.OnClickListener() {
+        /*currentCategoryTitleTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO:
                 int measuredHeight = mContentList.getMeasuredHeight();
                 //LogUtils.d(HomePagerFragment.this,"measuredHeight-->"+measuredHeight);
-
-
             }
-        });
+        });*/
         //LooperPager监听
         looperPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -372,7 +367,6 @@ public class HomePagerFragment extends BaseFragment implements ICategoryPagerCal
     @Override
     public void onLooperItem(HomePagerContent.DataBean item) {
         //轮播图内容被点击了
-
         LogUtils.d(this,"轮播图item click --- >"+item.getTitle());
         handleItemClick(item);
     }

@@ -44,11 +44,7 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
     @BindView(R.id.fragment_bar_title_tv)
     public TextView barTitleTv;
 
-
-
-
     private OnSellContentAdapter mOnSellContentAdapter ;
-
 
     @Override
     protected void initPresenter() {
@@ -56,7 +52,7 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
         //注册逻辑层
         mOnSellPagePresenter = PresenterManager.getInstance().getmSellPagePresenter();
         mOnSellPagePresenter.registerViewCallback(this);
-        mOnSellPagePresenter.getOnSellContent();
+        mOnSellPagePresenter.getOnSellContent();//加载内容
     }
 
     @Override
@@ -80,7 +76,6 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
             @Override
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
                 //去加载更多
-
                 if (mOnSellPagePresenter != null) {
                     mOnSellPagePresenter.loadedMore();
                 }
@@ -113,9 +108,9 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
             }
         });
 
-        mTwinklingRefreshLayout.setEnableLoadmore(true);
-        mTwinklingRefreshLayout.setEnableRefresh(false);
-        mTwinklingRefreshLayout.setEnableOverScroll(true);
+        mTwinklingRefreshLayout.setEnableLoadmore(true);//是否允许加载更多
+        mTwinklingRefreshLayout.setEnableRefresh(false);//是否允许下拉刷新
+        mTwinklingRefreshLayout.setEnableOverScroll(true);//是否允许开启越界回弹模式
 
 
     }

@@ -1,7 +1,7 @@
 package com.example.taobaounion.model.domain;
 
 public class CacheWithDuration {
-    private long duration;
+    private long duration;//过期时长，毫秒
     private String cache;
 
     public CacheWithDuration(long duration, String cache) {

@@ -43,6 +43,13 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    /**
+     * 如果子fragment需要知道网络错误以后的点击，那覆盖些方法即可
+     */
+    protected void onRetryClick() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

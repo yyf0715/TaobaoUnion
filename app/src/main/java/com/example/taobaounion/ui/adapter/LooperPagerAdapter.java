@@ -49,9 +49,10 @@ public class LooperPagerAdapter extends PagerAdapter {
         int ivSize = (measuredWidth > measuredHeight ? measuredWidth : measuredHeight) / 2;//节省流量
         String coverUrl = UrlUtils.getCoverPath(dataBean.getPict_url(),ivSize );
         ImageView iv = new ImageView(container.getContext());
-        Glide.with(container.getContext()).load(coverUrl).into(iv);
+        Glide.with(container.getContext()).load(coverUrl).into(iv);//加载图片并且绑定组件
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //Params->参数
+        //设置图片布局
         iv.setLayoutParams(layoutParams);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);//图形填充
 

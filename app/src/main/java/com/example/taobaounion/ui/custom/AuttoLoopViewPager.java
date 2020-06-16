@@ -32,9 +32,9 @@ public class AuttoLoopViewPager extends ViewPager {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.AutoLoopeStyle);
+        TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.AutoLoopStyle);//获取自定义属性值
         //获取属性
-        mDuration = t.getInteger(R.styleable.AutoLoopeStyle_duration, (int) DEFAULT_DURATION);
+        mDuration = t.getInteger(R.styleable.AutoLoopStyle_duration, (int) DEFAULT_DURATION);
         LogUtils.d(this,"mDuration--->"+mDuration);
         //回收资源
         t.recycle();

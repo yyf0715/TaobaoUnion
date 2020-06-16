@@ -109,7 +109,7 @@ public class SearchResult {
                     this.map_data = map_data;
                 }
 
-                public static class MapDataBean {
+                public static class MapDataBean implements ILinearItemInfo{
                     /**
                      * category_id : 50011977
                      * category_name : 洁面
@@ -167,7 +167,7 @@ public class SearchResult {
                     private String category_name;
                     private String commission_rate;
                     private String commission_type;
-                    private String coupon_amount;
+                    private long coupon_amount;
                     private String coupon_end_time;
                     private String coupon_id;
                     private String coupon_info;
@@ -246,11 +246,11 @@ public class SearchResult {
                         this.commission_type = commission_type;
                     }
 
-                    public String getCoupon_amount() {
+                    public long getCoupon_amount() {
                         return coupon_amount;
                     }
 
-                    public void setCoupon_amount(String coupon_amount) {
+                    public void setCoupon_amount(long coupon_amount) {
                         this.coupon_amount = coupon_amount;
                     }
 
@@ -510,6 +510,11 @@ public class SearchResult {
                         this.small_images = small_images;
                     }
 
+                    @Override
+                    public String getCover() {
+                        return pict_url;
+                    }
+
                     public String getTitle() {
                         return title;
                     }
@@ -538,6 +543,16 @@ public class SearchResult {
                         return url;
                     }
 
+                    @Override
+                    public String getFinalPrise() {
+                        return zk_final_price;
+                    }
+
+                    @Override
+                    public long getCouponAmount() {
+                        return coupon_amount;
+                    }
+
                     public void setUrl(String url) {
                         this.url = url;
                     }
@@ -550,7 +565,7 @@ public class SearchResult {
                         this.user_type = user_type;
                     }
 
-                    public int getVolume() {
+                    public long getVolume() {
                         return volume;
                     }
 

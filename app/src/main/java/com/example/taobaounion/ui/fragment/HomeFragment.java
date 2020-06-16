@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.taobaounion.R;
 import com.example.taobaounion.base.BaseFragment;
 import com.example.taobaounion.model.domain.Categories;
 import com.example.taobaounion.presenter.IHomePresenter;
+import com.example.taobaounion.ui.activity.IMainActivity;
 import com.example.taobaounion.ui.adapter.HomePagerAdapter;
 import com.example.taobaounion.utils.LogUtils;
 import com.example.taobaounion.utils.PresenterManager;
@@ -30,7 +33,13 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
 
     @BindView(R.id.home_pager)
     public ViewPager homePager;
+
+    @BindView(R.id.home_search_input_box)
+    public View mSearchInputBox;
     private HomePagerAdapter mHomePagerAdapter;
+
+    @BindView(R.id.home_search_icon)
+    public ImageView mHomesearchicon;
 
     @Override
     protected int getRootViewResId() {
@@ -65,6 +74,26 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
         //创建Presenter
         mHomePresenter =PresenterManager.getInstance().getmHomePresenter();
         mHomePresenter.registerViewCallback(this);//注册接口
+        mSearchInputBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到搜索页面
+                FragmentActivity activity = getActivity();
+                if(activity instanceof IMainActivity) {
+                    ((IMainActivity) activity).switch2Search();
+                }
+            }
+        });
+        mHomesearchicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到搜索页面
+                FragmentActivity activity = getActivity();
+                if(activity instanceof IMainActivity) {
+                    ((IMainActivity) activity).switch2Search();
+                }
+            }
+        });
     }
 
     @Override

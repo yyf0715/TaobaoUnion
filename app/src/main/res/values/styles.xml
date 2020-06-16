@@ -6,9 +6,5 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-<!--    自定义属性-->
-    <declare-styleable name="AutoLoopeStyle">
-        <attr name="duration" format="integer"></attr>
-    </declare-styleable>
 
 </resources>

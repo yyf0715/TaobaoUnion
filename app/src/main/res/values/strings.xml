@@ -13,4 +13,5 @@
     <string name="text_selected_title">精选宝贝</string>
     <string name="text_on_sell_title">特惠宝贝</string>
     <string name="text_search_tips">搜索你所想的宝贝</string>
+    <string name="text_search_history">搜索历史</string>
 </resources>
