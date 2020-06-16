@@ -3,7 +3,9 @@ package com.example.taobaounion.ui.fragment;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +41,7 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
     @BindView(R.id.on_sell_refresh_layout)
     public TwinklingRefreshLayout mTwinklingRefreshLayout;
 
-   // @BindView(R.id.fragment_bar_title_tv)
+    @BindView(R.id.fragment_bar_title_tv)
     public TextView barTitleTv;
 
 
@@ -86,6 +88,11 @@ public class OnSellFragment extends BaseFragment implements IOnSellPageCallback,
         });
 
         mOnSellContentAdapter.setOnSellPageItemClickListener(this);
+    }
+
+    @Override
+    protected View loadRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_with_bar_layout, container, false);
     }
 
     @Override

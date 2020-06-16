@@ -15,7 +15,7 @@ public class LogUtils {
 
     public static void d(Object obj, String log) {//debug
         if (currentLev >= DEBUG_LEV) {
-            Log.d(obj.getClass().getSimpleName(), log);
+            Log.d(obj.getClass().getSimpleName(),log);
         }
     }
 

@@ -3,7 +3,10 @@ package com.example.taobaounion.ui.fragment;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +35,9 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
 
     @BindView(R.id.right_content_list)
     public RecyclerView rightContentList;
+
+    @BindView(R.id.fragment_bar_title_tv)
+    public TextView barTitleTv;
 
     private ISelectedPresenter mSelectedPresenter;
     private SelectedPageLeftAdapter mLeftAdapter;
@@ -62,6 +68,11 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
     }
 
     @Override
+    protected View loadRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_with_bar_layout,container,false);
+    }
+
+    @Override
     protected int getRootViewResId() {
         return R.layout.fragment_selected;
     }
@@ -72,6 +83,7 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
         mLeftAdapter.setOnLeftItemClickListener(this);
         mRightAdapter.setOnSelectedPageContentItemClickListener(this);
     }
+
 
     @Override
     protected void initView(View rootView) {
@@ -87,8 +99,8 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
         rightContentList.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-               int topAndButtom = SizeUtils.dip2px(getContext(),4);//讲px转换为pd
-                int leftAndRight = SizeUtils.dip2px(getContext(),6);
+                int topAndButtom = SizeUtils.dip2px(getContext(), 4);//讲px转换为pd
+                int leftAndRight = SizeUtils.dip2px(getContext(), 6);
 
                 outRect.top = topAndButtom;//内边距
                 outRect.bottom = topAndButtom;//内边距
@@ -96,7 +108,7 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
                 outRect.right = leftAndRight;
             }
         });
-
+        barTitleTv.setText(getResources().getText(R.string.text_selected_title));
     }
 
 
@@ -136,8 +148,6 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
     }
 
 
-
-
     @Override
     public void onLeftItemClick(SelectedPageCategory.DataBean item) {
         //左边的分类被点击了
@@ -153,7 +163,7 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
         String title = item.getTitle();//获取标题
         //String url = item.getClick_url();//获取url   getClick_url()详情地址
         String url = item.getCoupon_click_url();
-        if (TextUtils.isEmpty(url)){//可能会有一些没有优惠券了
+        if (TextUtils.isEmpty(url)) {//可能会有一些没有优惠券了
             ToastUtil.showToast("来晚了，没有优惠券了");
             url = item.getClick_url();
         }
@@ -162,7 +172,7 @@ public class SelectedFragment extends BaseFragment implements ISelectedPageCallb
         ITicketPresenter ticketPresenter = PresenterManager.getInstance().getmTicketPresenter();
 
         //LogUtils.d(this,"cover-->>>>"+cover);
-        ticketPresenter.getTicket(title,url,cover);
+        ticketPresenter.getTicket(title, url, cover);
         startActivity(new Intent(getContext(), TicketActivity.class));
     }
 }

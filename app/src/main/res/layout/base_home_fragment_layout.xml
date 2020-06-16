@@ -38,7 +38,7 @@
             android:layout_toRightOf="@id/logo"
             android:background="@drawable/shape_edit_box_bg"
             android:focusable="false"
-            android:hint="搜索你所想的宝贝"
+            android:hint="@string/text_search_tips"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="14sp" />

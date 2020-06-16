@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     private void initFragment() {
         mHomeFragment = new HomeFragment();
         mSelectedFragment = new SelectedFragment();
@@ -64,22 +63,7 @@ public class MainActivity extends BaseActivity {
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                //Log.d(TAG, "title-->" + item.getTitle() + "|id-->" + item.getItemId());
-                //测试
-//                if (item.getItemId() == R.id.home) {
-//                    LogUtils.d(MainActivity.class, "切换到首页");
-//                    switchFragment(mHomeFragment);
-//                } else if (item.getItemId() == R.id.selected) {
-//                    LogUtils.d(MainActivity.class, "切换到精选");
-//                    switchFragment(mSelectedFragment);
-//                } else if (item.getItemId() == R.id.red_packet) {
-//                    LogUtils.d(MainActivity.class, "切换到特惠");
-//                    switchFragment(mRedPacketFragment);
-//                } else if (item.getItemId() == R.id.search) {
-//                    LogUtils.d(MainActivity.class, "切换到搜索");
-//                    switchFragment(mSearchFragment);
-//                }
+                //LogUtils.d(this, "HomeFragmentItemID -->" + item.getItemId());
                 switch (item.getItemId()) {
                     case R.id.home:
                         //LogUtils.d(this,"切换到首页");
@@ -110,6 +94,11 @@ public class MainActivity extends BaseActivity {
     private BaseFragment lastOneFragment = null;
 
     private void switchFragment(BaseFragment targetFragment) {//切换fragment方法
+
+        //如果和上一个一样，就不需要更改
+        if (lastOneFragment == targetFragment) {
+            return;
+        }
 
         //修改为add和hide的方式来控制Fragment的切换
 
